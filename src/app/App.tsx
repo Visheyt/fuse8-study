@@ -1,4 +1,12 @@
+import { Header } from '@/shared/header/header';
+import { Outlet } from 'react-router';
+
 const App = () => {
-  return <div>Hello, World!</div>;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
 };
 export default App;
