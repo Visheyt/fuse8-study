@@ -2,7 +2,7 @@
 
 ## Deploy
 
-[JsonPlaceholderPost](https://visheyt-fuse8.netlify.app/)
+[Deploy](https://visheyt-fuse8.netlify.app/)
 
 ## Description
 
