@@ -1,4 +1,4 @@
-import { Header } from '@/shared/header/header';
+import { Header } from '@/shared/ui/header/header';
 import { Outlet } from 'react-router';
 
 const App = () => {
