@@ -1,4 +1,4 @@
-# Chat
+# Fuse-8 study app
 
 ## Deploy
 
