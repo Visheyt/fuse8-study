@@ -9,6 +9,10 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   {
     files: ['**/*.{ts,tsx}'],
+    env: {
+      browser: true,
+      es2021: true,
+    },
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',

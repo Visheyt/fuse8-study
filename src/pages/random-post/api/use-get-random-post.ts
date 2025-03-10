@@ -8,6 +8,7 @@ export const useGetRandomPost = () => {
   const [error, setError] = useState<string>('');
 
   const getPost = useCallback(async () => {
+    setPost(null);
     setLoading(true);
     setError('');
 
