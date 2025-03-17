@@ -1,7 +1,7 @@
 import styles from './button.module.scss';
 import { ComponentProps, ReactNode } from 'react';
 
-type Variant = 'primary';
+type Variant = 'primary' | 'withIcon';
 
 type CustomButtonProps = ComponentProps<'button'> & {
   variant: Variant;

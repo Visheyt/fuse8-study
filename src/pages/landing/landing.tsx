@@ -1,15 +1,23 @@
-import { useNavigate } from 'react-router';
-import './landing.module.scss';
+import './landing.scss';
+import { RefObject, useRef } from 'react';
+
 export const Landing = () => {
-  const navigate = useNavigate();
+  const firstScreenRef = useRef<null | HTMLDivElement>(null);
+  const secondScreenRef = useRef<null | HTMLDivElement>(null);
+
+  const handleScroll = (ref: RefObject<HTMLDivElement | null>) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="example-homework">
-      <div className="screen">
+      <div className="screen" ref={firstScreenRef}>
         <h2>Интересные факты про эту страницу</h2>
 
         <p>В ней нет смысла</p>
-        <button onClick={() => navigate('#second-screen')}>
+        <button onClick={() => handleScroll(secondScreenRef)}>
           Перейти дальше
           <svg
             width="18"
@@ -34,6 +42,7 @@ export const Landing = () => {
 
       <div
         className="screen"
+        ref={secondScreenRef}
         id="second-screen"
         style={{ backgroundColor: '#e0e0e0' }}
       >
@@ -52,7 +61,7 @@ export const Landing = () => {
       <div className="block">
         <h5>Интерактив?</h5>
         <input type="text" placeholder="Напишите тут что-нибудь" />
-        <button onClick={() => navigate('#')}>
+        <button onClick={() => handleScroll(firstScreenRef)}>
           Вывести текст в alert
           <svg
             xmlns="http://www.w3.org/2000/svg"
