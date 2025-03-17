@@ -1,4 +1,3 @@
-import styles from './landing.module.scss';
 import { useRef, useState } from 'react';
 import { EyeIcon } from '@/shared/icons/eye.icon';
 import { AlertIcon } from '@/shared/icons/alert.icon';
@@ -18,13 +17,15 @@ export const Landing = () => {
   };
 
   const handleInteractiveClick = () => {
-    alert(inputValue);
+    if (inputValue) {
+      alert(inputValue);
+      setInputValue('');
+    }
     scrollTo(firstScreenRef);
-    setInputValue('');
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <LandingScreen ref={firstScreenRef}>
         <LandingScreen.Title>
           Интересные факты про эту страницу
@@ -39,9 +40,7 @@ export const Landing = () => {
       </LandingScreen>
       <LandingScreen ref={secondScreenRef} variant="gray">
         <LandingScreen.Title>Смотрите какие карточки</LandingScreen.Title>
-        <LandingScreen.Content>
-          <LandingScreen.CardsContainer cards={cardData} />
-        </LandingScreen.Content>
+        <LandingScreen.CardsContainer cards={cardData} />
       </LandingScreen>
       <LandingScreen>
         <LandingScreen.Title>Интерактив?</LandingScreen.Title>
