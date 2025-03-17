@@ -11,4 +11,8 @@ export const routes: Record<string, Route> = {
     getLink: () => 'random-post',
     pathName: '/random-post',
   },
+  landing: {
+    getLink: () => 'landing',
+    pathName: '/landing',
+  },
 };
