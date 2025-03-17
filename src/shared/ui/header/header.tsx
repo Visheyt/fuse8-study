@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router';
-import styles from './header.module.css';
+import styles from './header.module.scss';
 import { routes } from '@/shared/services/routes';
 
 const getNavClass = ({ isActive }: { isActive: boolean }) =>

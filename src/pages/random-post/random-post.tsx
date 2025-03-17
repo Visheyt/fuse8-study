@@ -1,4 +1,4 @@
-import styles from './random-post.module.css';
+import styles from './random-post.module.scss';
 import { useGetRandomPost } from './api/use-get-random-post';
 import { Spinner } from '@/shared/ui/spinner/spinner';
 import { Button } from '@/shared/ui/button/button';
