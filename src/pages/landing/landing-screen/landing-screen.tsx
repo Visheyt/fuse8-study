@@ -1,16 +1,24 @@
+import styles from './landing-screen.module.scss';
 import { ComponentPropsWithoutRef, ComponentPropsWithRef } from 'react';
 import { Button } from '@/shared/ui/button/button';
 import { Card } from '../types/card';
 
-type LandingScreenProps = ComponentPropsWithRef<'div'>;
+type LandingScreenProps = ComponentPropsWithRef<'div'> & {
+  variant?: 'gray';
+};
 
 export const LandingScreen = ({
   children,
+  variant,
   ref,
   ...props
 }: LandingScreenProps) => {
   return (
-    <div className="screen" {...props} ref={ref}>
+    <div
+      className={`${styles.screen} ${variant ? styles[variant] : ''}`}
+      {...props}
+      ref={ref}
+    >
       {children}
     </div>
   );
@@ -23,7 +31,11 @@ LandingScreen.Title = ({ children, ...props }: TitleProps) => {
 
 type ContentProps = ComponentPropsWithoutRef<'div'>;
 LandingScreen.Content = ({ children, ...props }: ContentProps) => {
-  return <div {...props}>{children}</div>;
+  return (
+    <div className={styles.content} {...props}>
+      {children}
+    </div>
+  );
 };
 
 type ScrollButtonProps = ComponentPropsWithoutRef<'button'>;
@@ -38,7 +50,7 @@ LandingScreen.ScrollButton = ({ children, ...props }: ScrollButtonProps) => {
 type CardProps = ComponentPropsWithoutRef<'div'> & Card;
 LandingScreen.Card = ({ title, text, ...props }: CardProps) => {
   return (
-    <div className="card" {...props}>
+    <div className={styles.card} {...props}>
       <h3>{title}</h3>
       <p>{text}</p>
     </div>
@@ -50,7 +62,7 @@ type CardsContainerProps = ComponentPropsWithoutRef<'div'> & {
 };
 LandingScreen.CardsContainer = ({ cards, ...props }: CardsContainerProps) => {
   return (
-    <div className="cards-container" {...props}>
+    <div className={styles.cardsContainer} {...props}>
       {cards.map((card) => (
         <LandingScreen.Card key={card.title} {...card} />
       ))}
