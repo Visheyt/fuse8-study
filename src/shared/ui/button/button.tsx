@@ -1,12 +1,12 @@
 import styles from './button.module.scss';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 
 type Variant = 'primary';
 
-interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type CustomButtonProps = ComponentProps<'button'> & {
   variant: Variant;
   children: ReactNode;
-}
+};
 
 export const Button = ({ variant, children, ...props }: CustomButtonProps) => {
   return (
