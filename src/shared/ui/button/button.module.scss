@@ -9,12 +9,16 @@
 
 .withIcon {
   cursor: pointer;
+
   display: flex;
   gap: 10px;
   align-items: center;
+
   padding: 10px 20px;
   border: none;
+
   font-size: 1rem;
   color: white;
+
   background-color: $blue;
 }

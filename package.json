@@ -8,8 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "stylelint": "stylelint '**/*{.css,.scss}'",
-    "stylelint:fix": "stylelint '**/*{.css,.scss}' --fix"
+    "lint:styles": "stylelint '**/*.{css,scss}' --fix"
   },
   "dependencies": {
     "react": "^19.0.0",
