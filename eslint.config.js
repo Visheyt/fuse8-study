@@ -9,11 +9,16 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   {
     files: ['**/*.{ts,tsx}'],
-    env: {
-      browser: true,
-      es2021: true,
-    },
+
     languageOptions: {
+      globals: {
+        browser: true,
+        es2021: true,
+        node: true,
+        document: 'readonly',
+        window: 'readonly',
+        alert: 'readonly',
+      },
       ecmaVersion: 'latest',
       sourceType: 'module',
       parser: tsParser,
@@ -21,11 +26,11 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
-      },
-      globals: {
-        browser: true,
-        es2021: true,
-        node: true,
+        project: [
+          './tsconfig.json',
+          './tsconfig.app.json',
+          './tsconfig.node.json',
+        ],
       },
     },
     settings: {

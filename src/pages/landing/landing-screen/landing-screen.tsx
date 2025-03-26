@@ -25,12 +25,12 @@ export const LandingScreen = ({
 };
 
 type TitleProps = ComponentPropsWithoutRef<'h2'>;
-LandingScreen.Title = ({ children, ...props }: TitleProps) => {
+LandingScreen.Title = function Title({ children, ...props }: TitleProps) {
   return <h2 {...props}>{children}</h2>;
 };
 
 type ContentProps = ComponentPropsWithoutRef<'div'>;
-LandingScreen.Content = ({ children, ...props }: ContentProps) => {
+LandingScreen.Content = function Content({ children, ...props }: ContentProps) {
   return (
     <div className={styles.content} {...props}>
       {children}
@@ -39,7 +39,10 @@ LandingScreen.Content = ({ children, ...props }: ContentProps) => {
 };
 
 type ScrollButtonProps = ComponentPropsWithoutRef<'button'>;
-LandingScreen.ScrollButton = ({ children, ...props }: ScrollButtonProps) => {
+LandingScreen.ScrollButton = function ScrollButton({
+  children,
+  ...props
+}: ScrollButtonProps) {
   return (
     <Button variant="withIcon" {...props}>
       {children}
@@ -48,7 +51,7 @@ LandingScreen.ScrollButton = ({ children, ...props }: ScrollButtonProps) => {
 };
 
 type CardProps = ComponentPropsWithoutRef<'div'> & Card;
-LandingScreen.Card = ({ title, text, ...props }: CardProps) => {
+LandingScreen.Card = function Card({ title, text, ...props }: CardProps) {
   return (
     <div className={styles.card} {...props}>
       <h3>{title}</h3>
@@ -60,7 +63,10 @@ LandingScreen.Card = ({ title, text, ...props }: CardProps) => {
 type CardsContainerProps = ComponentPropsWithoutRef<'div'> & {
   cards: Card[];
 };
-LandingScreen.CardsContainer = ({ cards, ...props }: CardsContainerProps) => {
+LandingScreen.CardsContainer = function CardsContainer({
+  cards,
+  ...props
+}: CardsContainerProps) {
   return (
     <div className={styles.cardsContainer} {...props}>
       {cards.map((card) => (

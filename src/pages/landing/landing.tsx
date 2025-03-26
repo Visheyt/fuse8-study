@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { EyeIcon } from '@/shared/icons/eye.icon';
 import { AlertIcon } from '@/shared/icons/alert.icon';
 import { LandingScreen } from './landing-screen/landing-screen';
@@ -12,7 +12,7 @@ export const Landing = () => {
   const secondScreenRef = useRef<HTMLDivElement>(null);
   const scrollTo = useScroll();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
