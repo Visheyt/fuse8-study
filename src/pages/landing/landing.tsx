@@ -25,18 +25,19 @@ export const Landing = () => {
 
   return (
     <div>
+      <h1 className="visually-hidden">Лэндинг</h1>
       <LandingScreen ref={firstScreenRef}>
         <LandingScreen.Title>
           Интересные факты про эту страницу
         </LandingScreen.Title>
         <LandingScreen.Content>
           <p>В ней нет смысла</p>
-          <LandingScreen.ScrollButton onClick={() => scrollTo(secondScreenRef)}>
+          <LandingScreen.Button onClick={() => scrollTo(secondScreenRef)}>
             Перейти дальше
             <div style={{ color: 'black', display: 'flex' }}>
               <EyeIcon />
             </div>
-          </LandingScreen.ScrollButton>
+          </LandingScreen.Button>
         </LandingScreen.Content>
       </LandingScreen>
       <LandingScreen ref={secondScreenRef} variant="gray">
@@ -52,12 +53,12 @@ export const Landing = () => {
             value={inputValue}
             onChange={(e) => handleChange(e)}
           />
-          <LandingScreen.ScrollButton onClick={handleInteractiveClick}>
+          <LandingScreen.Button onClick={handleInteractiveClick}>
             Вывести текст в alert
             <div style={{ color: 'tomato', display: 'flex' }}>
               <AlertIcon />
             </div>
-          </LandingScreen.ScrollButton>
+          </LandingScreen.Button>
         </LandingScreen.Content>
       </LandingScreen>
     </div>

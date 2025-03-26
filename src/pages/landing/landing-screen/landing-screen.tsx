@@ -38,11 +38,11 @@ LandingScreen.Content = function Content({ children, ...props }: ContentProps) {
   );
 };
 
-type ScrollButtonProps = ComponentPropsWithoutRef<'button'>;
-LandingScreen.ScrollButton = function ScrollButton({
+type ButtonProps = ComponentPropsWithoutRef<'button'>;
+LandingScreen.Button = function LandingButton({
   children,
   ...props
-}: ScrollButtonProps) {
+}: ButtonProps) {
   return (
     <Button variant="withIcon" {...props}>
       {children}
