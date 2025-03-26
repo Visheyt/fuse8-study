@@ -1,3 +1,5 @@
+@use '@/styles/mixins' as *;
+
 * {
   box-sizing: border-box;
 }
@@ -13,6 +15,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
 #root {
@@ -23,12 +26,23 @@ body {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+  @include flex-column-center;
+
   flex-grow: 1;
   gap: 50px;
-  align-items: center;
-  justify-content: center;
-
   width: 100%;
+}
+
+.visually-hidden {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+
+  clip: rect(0, 0, 0, 0);
 }

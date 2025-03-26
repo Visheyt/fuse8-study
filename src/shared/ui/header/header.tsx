@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router';
-import styles from './header.module.css';
+import styles from './header.module.scss';
 import { routes } from '@/shared/services/routes';
 
 const getNavClass = ({ isActive }: { isActive: boolean }) =>
@@ -14,6 +14,9 @@ export const Header = () => {
         </NavLink>
         <NavLink className={getNavClass} to={routes.randomPost.getLink()}>
           Random-post
+        </NavLink>
+        <NavLink className={getNavClass} to={routes.landing.getLink()}>
+          Landing
         </NavLink>
       </nav>
     </header>

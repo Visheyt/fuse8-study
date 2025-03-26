@@ -6,7 +6,10 @@
   ],
   "compilerOptions": {
     "lib": ["dom", "esnext"],
-    "baseUrl": ".",
+    "baseUrl": "./",
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "target": "es2021",
     "paths": {
       "@/*": ["src/*"],
       "@app/*": ["src/app/*"],

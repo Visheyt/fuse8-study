@@ -1,0 +1,45 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
+.screen {
+  @include flex-column-center;
+
+  height: 100vh;
+  padding: 20px;
+  text-align: center;
+}
+
+.gray {
+  background-color: $gray;
+}
+
+.content {
+  @include flex-column-center;
+
+  gap: 10px;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+
+  @include desktop {
+    flex-wrap: nowrap;
+  }
+}
+
+.card {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  background-color: white;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+
+  @include desktop {
+    width: 300px;
+  }
+}

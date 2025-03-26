@@ -1,0 +1,24 @@
+@use '@/styles/variables' as *;
+
+.primary {
+  cursor: pointer;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+}
+
+.withIcon {
+  cursor: pointer;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  padding: 10px 20px;
+  border: none;
+
+  font-size: 1rem;
+  color: white;
+
+  background-color: $blue;
+}
