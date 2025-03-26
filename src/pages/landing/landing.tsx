@@ -33,7 +33,9 @@ export const Landing = () => {
           <p>В ней нет смысла</p>
           <LandingScreen.ScrollButton onClick={() => scrollTo(secondScreenRef)}>
             Перейти дальше
-            <EyeIcon />
+            <div style={{ color: 'black', display: 'flex' }}>
+              <EyeIcon />
+            </div>
           </LandingScreen.ScrollButton>
         </LandingScreen.Content>
       </LandingScreen>
@@ -52,7 +54,9 @@ export const Landing = () => {
           />
           <LandingScreen.ScrollButton onClick={handleInteractiveClick}>
             Вывести текст в alert
-            <AlertIcon />
+            <div style={{ color: 'tomato', display: 'flex' }}>
+              <AlertIcon />
+            </div>
           </LandingScreen.ScrollButton>
         </LandingScreen.Content>
       </LandingScreen>
