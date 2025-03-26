@@ -21,7 +21,6 @@ export const Landing = () => {
       alert(inputValue);
       setInputValue('');
     }
-    scrollTo(firstScreenRef);
   };
 
   return (
