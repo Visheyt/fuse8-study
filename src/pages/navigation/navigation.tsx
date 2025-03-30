@@ -1,4 +1,4 @@
-import styles from './navigation.module.scss';
+import './navigation.scss';
 
 const USER_READ_PERMISSIONS = [
   'vacancies',
@@ -16,8 +16,13 @@ const checkHasUserPermission = (routeName: string) => {
 // const checkHasUserPermission = async (routeName) => {
 // 	return USER_READ_PERMISSIONS.includes(routeName)
 // }
-
-const routes = {
+type Route = {
+  name: string;
+  pathname: string;
+  getLink: () => string;
+  text: string;
+};
+const routes: Record<string, Route> = {
   vacancies: {
     name: 'vacancies',
     pathname: 'vacancies',
@@ -46,11 +51,16 @@ const routes = {
     name: 'partners',
     pathname: 'partners',
     getLink: () => '/partners',
-    text: 'Клиенты',
+    text: 'Партнеры',
   },
 };
 
-const navigationList = [
+type NavigationType = {
+  name: string;
+  text: string;
+  children: (NavigationType | Route)[];
+};
+const navigationList: NavigationType[] = [
   {
     name: 'content',
     text: 'Контент',
@@ -82,10 +92,25 @@ const navigationList = [
 
 // Нужно написать функцию
 const generateNavigationListWithPermissions = (
-  navigationList,
-  checkPermission
+  navigationList: NavigationType[],
+  checkPermission: (routeName: string) => boolean
 ) => {
-  return [];
+  return navigationList.map((navEl) => {
+    return {
+      ...navEl,
+      children: navEl.children.map((el) => {
+        const element = el as NavigationType;
+        const filteredChildren = element.children.filter((i) =>
+          checkPermission(i.name)
+        );
+
+        return {
+          ...element,
+          children: filteredChildren,
+        };
+      }),
+    };
+  });
 };
 
 export const Navigation = () => {
@@ -95,36 +120,32 @@ export const Navigation = () => {
   );
 
   return (
-    <div className={styles.container}>
-      {navigationListWithPermission.map((item) => item)}
-
-      <div className={styles.navigation}>
-        <div className={'navigation-level-1'}>
-          Контент
-          <div className="navigation-level-2">
-            Работа
-            <div className="navigation-level-3">
-              {checkHasUserPermission('vacancies') && <div>Вакансии</div>}
-              {checkHasUserPermission('candidates') && <div>Кандидаты</div>}
+    <div className="container">
+      <div className="navigation">
+        {navigationListWithPermission.length > 0 &&
+          navigationListWithPermission.map((item) => (
+            <div key={item.name} className={'navigation-level-1'}>
+              {item.children.length > 0 && (
+                <>
+                  {item.text}
+                  {item.children.map((child) => (
+                    <div key={child.name} className="navigation-level-2">
+                      {child.children.length > 0 && (
+                        <>
+                          {child.text}
+                          {child.children.map((i) => (
+                            <div key={i.name} className="navigation-level-3">
+                              {i.text}
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
-          </div>
-          <div className="navigation-level-2">
-            Новости
-            <div className="navigation-level-3">
-              {checkHasUserPermission('events') && <div>События</div>}
-            </div>
-          </div>
-        </div>
-        <div className="navigation-level-1">
-          Пользователи
-          <div className="navigation-level-2">
-            Клиенты
-            <div className="navigation-level-3">
-              {checkHasUserPermission('clients') && <div>Клиенты</div>}
-              {checkHasUserPermission('partners') && <div>Партнеры</div>}
-            </div>
-          </div>
-        </div>
+          ))}
       </div>
     </div>
   );
