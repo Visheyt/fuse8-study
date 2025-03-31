@@ -15,4 +15,8 @@ export const routes: Record<string, Route> = {
     getLink: () => 'landing',
     pathName: '/landing',
   },
+  navigation: {
+    getLink: () => 'navigation',
+    pathName: '/navigation',
+  },
 };

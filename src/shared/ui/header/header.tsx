@@ -18,6 +18,9 @@ export const Header = () => {
         <NavLink className={getNavClass} to={routes.landing.getLink()}>
           Landing
         </NavLink>
+        <NavLink className={getNavClass} to={routes.navigation.getLink()}>
+          Navigation
+        </NavLink>
       </nav>
     </header>
   );
