@@ -1,22 +1,15 @@
-import { navigationList } from './data/data';
 import styles from './navigation.module.scss';
 import { NavigationItem } from './navigation-item/navigation-item';
 
-import {
-  checkHasUserPermission,
-  generateNavigationListWithPermissions,
-} from './services/navigation-helpers';
+import { useNavigationList } from './hooks/use-navigation-list';
 
 export const Navigation = () => {
-  const visibleNavigationList = generateNavigationListWithPermissions(
-    navigationList,
-    checkHasUserPermission
-  ).filter(({ children }) => children.length);
+  const navigationList = useNavigationList();
 
   return (
     <div className={styles.container}>
       <div className={styles.navigation}>
-        {visibleNavigationList.map((item) => (
+        {navigationList.map((item) => (
           <NavigationItem key={item.name} item={item} level={1} />
         ))}
       </div>
