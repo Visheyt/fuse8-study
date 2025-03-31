@@ -1,6 +1,7 @@
 import { NavigationItemType } from '../types/navigation-types';
-import { isNavigationType } from '../utils/navigation-helpers';
+import { isNavigationType } from '../services/navigation-helpers';
 import styles from './navigation-item.module.scss';
+import { Link } from 'react-router';
 
 export const NavigationItem = ({
   item,
@@ -27,7 +28,7 @@ export const NavigationItem = ({
           )}
         </>
       ) : (
-        <a href={item.getLink()}>{item.text}</a>
+        <Link to={item.getLink()}>{item.text}</Link>
       )}
     </div>
   );

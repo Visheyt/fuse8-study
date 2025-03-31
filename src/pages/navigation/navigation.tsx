@@ -1,27 +1,22 @@
 import { navigationList } from './data/data';
-import './navigation.scss';
+import styles from './navigation.module.scss';
 import { NavigationItem } from './navigation-item/navigation-item';
 
 import {
   checkHasUserPermission,
   generateNavigationListWithPermissions,
-} from './utils/navigation-helpers';
+} from './services/navigation-helpers';
 
 export const Navigation = () => {
-  const navigationListWithPermission = generateNavigationListWithPermissions(
+  const visibleNavigationList = generateNavigationListWithPermissions(
     navigationList,
     checkHasUserPermission
-  );
-
-  // Фильтруем элементы верхнего уровня, у которых нет дочерних элементов
-  const filteredNavigationList = navigationListWithPermission.filter(
-    (item) => item.children.length > 0
-  );
+  ).filter(({ children }) => children.length);
 
   return (
-    <div className="container">
-      <div className="navigation">
-        {filteredNavigationList.map((item) => (
+    <div className={styles.container}>
+      <div className={styles.navigation}>
+        {visibleNavigationList.map((item) => (
           <NavigationItem key={item.name} item={item} level={1} />
         ))}
       </div>

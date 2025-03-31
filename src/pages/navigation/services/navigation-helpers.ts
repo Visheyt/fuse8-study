@@ -11,10 +11,6 @@ export const checkHasUserPermission = (routeName: string) => {
   return USER_READ_PERMISSIONS.includes(routeName);
 };
 
-// Со звездочкой проверка прав асинхронная
-// const checkHasUserPermission = async (routeName) => {
-// 	return USER_READ_PERMISSIONS.includes(routeName)
-// }
 export const generateNavigationListWithPermissions = (
   navigationList: NavigationType[],
   checkPermission: (routeName: string) => boolean
