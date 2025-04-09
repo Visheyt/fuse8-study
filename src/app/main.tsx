@@ -8,6 +8,7 @@ import { RandomPost } from '@/pages/random-post/random-post';
 import App from './App';
 import { Landing } from '@/pages/landing/landing';
 import { Navigation } from '@/pages/navigation/ui/navigation';
+import { Articles } from '@/pages/articles/articles';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path={routes.randomPost.pathName} element={<RandomPost />} />
           <Route path={routes.landing.pathName} element={<Landing />} />
           <Route path={routes.navigation.pathName} element={<Navigation />} />
+          <Route path={routes.articles.pathName} element={<Articles />} />
         </Route>
       </Routes>
     </BrowserRouter>
