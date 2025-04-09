@@ -1,10 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { articleAPI } from '../../api/article-api';
 import { useNavigate } from 'react-router';
-import { routes } from '../../routes';
+
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { routes } from '@/shared/services/routes';
 
 const createFormSchema = z.object({
   title: z
@@ -36,7 +37,7 @@ export const CreateArticle = () => {
         type: 'draft',
       },
     });
-    navigate(routes.articles.getLink());
+    navigate(routes.articles.routes!.articlesList.getLink());
   });
 
   return (

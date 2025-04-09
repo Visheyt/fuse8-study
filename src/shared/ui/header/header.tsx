@@ -2,7 +2,7 @@ import { NavLink } from 'react-router';
 import styles from './header.module.scss';
 import { routes } from '@/shared/services/routes';
 
-const getNavClass = ({ isActive }: { isActive: boolean }) =>
+export const getNavClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? styles.active : '';
 
 export const Header = () => {
