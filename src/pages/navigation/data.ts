@@ -1,4 +1,4 @@
-import { NavigationRoute, NavigationType } from '../types/navigation-types';
+import { NavigationRoute, NavigationType } from './navigation-types';
 
 export const USER_READ_PERMISSIONS = [
   'vacancies',

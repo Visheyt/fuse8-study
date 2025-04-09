@@ -1,7 +1,7 @@
-interface BaseNavigation {
+type BaseNavigation = {
   name: string;
   text: string;
-}
+};
 
 export type NavigationRoute = BaseNavigation & {
   pathname: string;

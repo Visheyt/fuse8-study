@@ -1,5 +1,4 @@
-import { USER_READ_PERMISSIONS } from '../data/data';
-import { NavigationItemType, NavigationType } from '../types/navigation-types';
+import { NavigationItemType, NavigationType } from '../navigation-types';
 
 export const isNavigationType = (
   item: NavigationItemType
@@ -7,25 +6,22 @@ export const isNavigationType = (
   return 'children' in item;
 };
 
-export const checkHasUserPermission = (routeName: string) => {
-  return USER_READ_PERMISSIONS.includes(routeName);
-};
-
 export const generateNavigationListWithPermissions = (
   navigationList: NavigationType[],
   checkPermission: (routeName: string) => boolean
 ): NavigationType[] => {
-  return navigationList.map((navEl) => ({
+  const list = navigationList.map((navEl) => ({
     ...navEl,
     children: navEl.children
       .map((child) =>
         isNavigationType(child)
           ? {
               ...child,
-              children: generateNavigationListWithPermissions(
-                [child],
-                checkPermission
-              )[0].children,
+              children:
+                generateNavigationListWithPermissions(
+                  [child],
+                  checkPermission
+                )[0]?.children ?? [],
             }
           : child
       )
@@ -35,4 +31,6 @@ export const generateNavigationListWithPermissions = (
           (isNavigationType(child) && child.children.length > 0)
       ),
   }));
+
+  return list.filter(({ children }) => children.length);
 };

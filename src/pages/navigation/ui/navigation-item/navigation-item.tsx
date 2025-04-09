@@ -1,5 +1,5 @@
-import { NavigationItemType } from '../types/navigation-types';
-import { isNavigationType } from '../services/navigation-helpers';
+import { NavigationItemType } from '../../navigation-types';
+import { isNavigationType } from '../../helpers/navigation-helpers';
 import styles from './navigation-item.module.scss';
 import { Link } from 'react-router';
 

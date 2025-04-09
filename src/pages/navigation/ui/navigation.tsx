@@ -1,7 +1,7 @@
 import styles from './navigation.module.scss';
 import { NavigationItem } from './navigation-item/navigation-item';
 
-import { useNavigationList } from './hooks/use-navigation-list';
+import { useNavigationList } from '../hooks/use-navigation-list';
 
 export const Navigation = () => {
   const navigationList = useNavigationList();

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { navigationList } from '../data/data';
-import {
-  generateNavigationListWithPermissions,
-  checkHasUserPermission,
-} from '../services/navigation-helpers';
-import { NavigationType } from '../types/navigation-types';
+import { navigationList, USER_READ_PERMISSIONS } from '../data';
+import { generateNavigationListWithPermissions } from '../helpers/navigation-helpers';
+import { NavigationType } from '../navigation-types';
+
+const checkHasUserPermission = (routeName: string) => {
+  return USER_READ_PERMISSIONS.includes(routeName);
+};
 
 export const useNavigationList = () => {
   const [navigationListWithPermission, setNavigationListWithPermission] =
@@ -14,7 +15,7 @@ export const useNavigationList = () => {
     const list = generateNavigationListWithPermissions(
       navigationList,
       checkHasUserPermission
-    ).filter(({ children }) => children.length);
+    );
 
     setNavigationListWithPermission(list);
   }, []);
