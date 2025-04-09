@@ -8,7 +8,7 @@ import { RandomPost } from '@/pages/random-post/random-post';
 import App from './App';
 import { Landing } from '@/pages/landing/landing';
 import { Navigation } from '@/pages/navigation/ui/navigation';
-import { Articles } from '@/pages/articles/articles';
+import { Articles } from '@/pages/articles/pages/articles/articles';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
