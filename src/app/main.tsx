@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './global.scss';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { routes } from '@/shared/services/routes';
 import { Main } from '@/pages/main/main';
 import { RandomPost } from '@/pages/random-post/random-post';
@@ -28,7 +28,17 @@ createRoot(document.getElementById('root')!).render(
             <Route path={routes.navigation.pathName} element={<Navigation />} />
             <Route path={routes.articles.pathName} element={<Articles />}>
               <Route
+                index
+                element={
+                  <Navigate
+                    to={routes.articles.routes!.articlesList.pathName}
+                    replace
+                  />
+                }
+              />
+              <Route
                 path={routes.articles.routes!.articlesList.pathName}
+                index
                 element={<ArticlesList />}
               />
               <Route
