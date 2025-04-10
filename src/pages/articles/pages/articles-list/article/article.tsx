@@ -1,9 +1,12 @@
-import { Article as ArticleProps } from '@/pages/articles/api/types';
+import { Article as ArticleType } from '@/pages/articles/api/types';
 import styles from './article.module.scss';
 import { Button } from '@/shared/ui/button/button';
 
+type ArticleProps = Omit<ArticleType, 'id'> & {
+  onDelete: () => void;
+};
 // todo Delete article
-export const Article = ({ title, content }: ArticleProps) => {
+export const Article = ({ title, content, onDelete }: ArticleProps) => {
   return (
     <li className={styles.article}>
       <header className={styles.header}>
@@ -21,7 +24,9 @@ export const Article = ({ title, content }: ArticleProps) => {
             <p>Опубликована {content.isNew && 'Новая статья'}</p>
           </div>
         )}
-        <Button variant="primary">Удалить</Button>
+        <Button variant="primary" onClick={onDelete}>
+          Удалить
+        </Button>
       </div>
     </li>
   );

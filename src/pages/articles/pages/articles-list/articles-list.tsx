@@ -21,7 +21,11 @@ export const ArticlesList = () => {
     <>
       <ul className={styles.list}>
         {articles.map((item) => (
-          <Article {...item} key={item.id} />
+          <Article
+            {...item}
+            key={item.id}
+            onDelete={() => deleteArticle(item.id)}
+          />
         ))}
       </ul>
     </>

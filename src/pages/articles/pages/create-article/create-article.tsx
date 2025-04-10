@@ -6,6 +6,9 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import { routes } from '@/shared/services/routes';
+import { Button } from '@/shared/ui/button/button';
+
+import styles from './create-article.module.scss';
 
 const createFormSchema = z.object({
   title: z
@@ -49,8 +52,8 @@ export const CreateArticle = () => {
   return (
     <div>
       <h1>Создать статью</h1>
-      <form onSubmit={submitHandler}>
-        <input type="text" {...register('title')} />
+      <form onSubmit={submitHandler} className={styles.form}>
+        <input type="text" {...register('title')} placeholder="Заголовок" />
         <select {...register('content.type')}>
           <option value="draft">Черновик</option>
           <option value="published">Опубликовано</option>
@@ -68,14 +71,14 @@ export const CreateArticle = () => {
             </label>
           </>
         )}
-
-        <button
+        <Button
+          variant="primary"
           type="submit"
           disabled={status === 'pending'}
           style={{ marginTop: '8px' }}
         >
           {status === 'pending' ? 'Создание' : 'Создать'}
-        </button>
+        </Button>
       </form>
     </div>
   );
