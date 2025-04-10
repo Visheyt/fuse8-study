@@ -14,7 +14,13 @@ import { CreateArticle } from '@/pages/articles/pages/create-article/create-arti
 import { Articles } from '@/pages/articles/articles';
 import { ArticlesList } from '@/pages/articles/pages/articles-list/articles-list';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 30,
+    },
+  },
+});
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

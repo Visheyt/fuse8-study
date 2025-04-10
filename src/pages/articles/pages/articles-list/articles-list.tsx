@@ -5,7 +5,7 @@ import styles from './articles-list.module.scss';
 
 export const ArticlesList = () => {
   const { data: articles, status } = useQuery({
-    queryKey: ['fetch-articles'],
+    queryKey: ['articles'],
     queryFn: articleAPI.getArticles,
   });
 

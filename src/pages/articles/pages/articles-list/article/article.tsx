@@ -5,7 +5,7 @@ import { Button } from '@/shared/ui/button/button';
 type ArticleProps = Omit<ArticleType, 'id'> & {
   onDelete: () => void;
 };
-// todo Delete article
+
 export const Article = ({ title, content, onDelete }: ArticleProps) => {
   return (
     <li className={styles.article}>

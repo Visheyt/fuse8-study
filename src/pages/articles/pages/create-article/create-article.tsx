@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { articleAPI } from '../../api/article-api';
 import { useNavigate } from 'react-router';
 
@@ -9,6 +9,7 @@ import { routes } from '@/shared/services/routes';
 import { Button } from '@/shared/ui/button/button';
 
 import styles from './create-article.module.scss';
+import { Article } from '../../api/types';
 
 const createFormSchema = z.object({
   title: z
@@ -37,9 +38,16 @@ export const CreateArticle = () => {
 
   const navigate = useNavigate();
 
+  const client = useQueryClient();
+
   const { status, mutate } = useMutation({
     mutationFn: articleAPI.createArticle,
-    onSuccess: () => navigate(routes.articles.routes!.articlesList.getLink()),
+    onSuccess: (newArticle) => {
+      navigate(routes.articles.routes!.articlesList.getLink());
+      client.setQueryData<Article[]>(['articles'], (oldData) => {
+        return [...(oldData || []), newArticle];
+      });
+    },
   });
 
   const submitHandler = handleSubmit((data: CreateFormValues) => {
@@ -53,17 +61,20 @@ export const CreateArticle = () => {
     <div>
       <h1>Создать статью</h1>
       <form onSubmit={submitHandler} className={styles.form}>
-        <input type="text" {...register('title')} placeholder="Заголовок" />
-        <select {...register('content.type')}>
-          <option value="draft">Черновик</option>
-          <option value="published">Опубликовано</option>
-        </select>
+        <div className={styles.formField}>
+          <label>Введите Заголовок:</label>
+          <input type="text" {...register('title')} placeholder="Заголовок" />
+        </div>
+
         {contentType === 'published' && (
           <>
-            <textarea
-              {...register('content.description')}
-              placeholder="Описание"
-            />
+            <div className={styles.formField}>
+              <label> Введите описание:</label>
+              <textarea
+                {...register('content.description')}
+                placeholder="Описание"
+              />
+            </div>
 
             <label>
               <input type="checkbox" {...register('content.isNew')} />
@@ -71,6 +82,10 @@ export const CreateArticle = () => {
             </label>
           </>
         )}
+        <select {...register('content.type')}>
+          <option value="draft">Черновик</option>
+          <option value="published">Опубликовано</option>
+        </select>
         <Button
           variant="primary"
           type="submit"
