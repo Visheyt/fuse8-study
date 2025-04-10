@@ -1,62 +1,20 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { articleAPI } from '../../api/article-api';
-import { useNavigate } from 'react-router';
-
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useWatch } from 'react-hook-form';
-import { routes } from '@/shared/services/routes';
 import { Button } from '@/shared/ui/button/button';
 
 import styles from './create-article.module.scss';
-import { Article } from '../../api/types';
 
-const createFormSchema = z.object({
-  title: z
-    .string()
-    .min(1, 'Название обязательно')
-    .max(100, 'Слишком длинное название'),
-  content: z.discriminatedUnion('type', [
-    z.object({ type: z.literal('draft') }),
-    z.object({
-      type: z.literal('published'),
-      description: z
-        .string()
-        .min(10, 'Минимум 10 символов')
-        .max(100, 'Слишком длинное описание'),
-      isNew: z.boolean(),
-    }),
-  ]),
-});
-
-type CreateFormValues = z.infer<typeof createFormSchema>;
+import { CreateFormValues } from './schema/form-schema';
+import { useAddArticle } from '../../hooks/useAddArticle';
+import { useArticleForm } from '../../hooks/useArticleForm';
 
 export const CreateArticle = () => {
-  const { register, handleSubmit, control } = useForm<CreateFormValues>({
-    resolver: zodResolver(createFormSchema),
-  });
+  const { register, handleSubmit, contentType } = useArticleForm();
 
-  const navigate = useNavigate();
-
-  const client = useQueryClient();
-
-  const { status, mutate } = useMutation({
-    mutationFn: articleAPI.createArticle,
-    onSuccess: (newArticle) => {
-      navigate(routes.articles.routes!.articlesList.getLink());
-      client.setQueryData<Article[]>(['articles'], (oldData) => {
-        return [...(oldData || []), newArticle];
-      });
-    },
-  });
+  const { status, addArticle } = useAddArticle();
 
   const submitHandler = handleSubmit((data: CreateFormValues) => {
-    mutate(data);
+    addArticle(data);
   });
-  const contentType = useWatch({
-    control,
-    name: 'content.type',
-  });
+
   return (
     <div>
       <h1>Создать статью</h1>
