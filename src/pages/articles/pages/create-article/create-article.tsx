@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { routes } from '@/shared/services/routes';
 
 const createFormSchema = z.object({
@@ -12,39 +12,63 @@ const createFormSchema = z.object({
     .string()
     .min(1, 'Название обязательно')
     .max(100, 'Слишком длинное название'),
+  content: z.discriminatedUnion('type', [
+    z.object({ type: z.literal('draft') }),
+    z.object({
+      type: z.literal('published'),
+      description: z
+        .string()
+        .min(10, 'Минимум 10 символов')
+        .max(100, 'Слишком длинное описание'),
+      isNew: z.boolean(),
+    }),
+  ]),
 });
 
 type CreateFormValues = z.infer<typeof createFormSchema>;
 
 export const CreateArticle = () => {
-  const { register, handleSubmit } = useForm<CreateFormValues>({
+  const { register, handleSubmit, control } = useForm<CreateFormValues>({
     resolver: zodResolver(createFormSchema),
-    defaultValues: {
-      title: '',
-    },
   });
 
   const navigate = useNavigate();
 
   const { status, mutate } = useMutation({
     mutationFn: articleAPI.createArticle,
+    onSuccess: () => navigate(routes.articles.routes!.articlesList.getLink()),
   });
 
   const submitHandler = handleSubmit((data: CreateFormValues) => {
-    mutate({
-      ...data,
-      content: {
-        type: 'draft',
-      },
-    });
-    navigate(routes.articles.routes!.articlesList.getLink());
+    mutate(data);
   });
-
+  const contentType = useWatch({
+    control,
+    name: 'content.type',
+  });
   return (
     <div>
       <h1>Создать статью</h1>
       <form onSubmit={submitHandler}>
         <input type="text" {...register('title')} />
+        <select {...register('content.type')}>
+          <option value="draft">Черновик</option>
+          <option value="published">Опубликовано</option>
+        </select>
+        {contentType === 'published' && (
+          <>
+            <textarea
+              {...register('content.description')}
+              placeholder="Описание"
+            />
+
+            <label>
+              <input type="checkbox" {...register('content.isNew')} />
+              Новая статья
+            </label>
+          </>
+        )}
+
         <button
           type="submit"
           disabled={status === 'pending'}

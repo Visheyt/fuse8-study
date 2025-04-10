@@ -1,7 +1,10 @@
 import { routes } from '@/shared/services/routes';
-import { getNavClass } from '@/shared/ui/header/header';
+
 import { NavLink, Outlet } from 'react-router';
 import styles from './articles.module.scss';
+
+const getNavClass = ({ isActive }: { isActive: boolean }) =>
+  isActive ? styles.active : '';
 
 export const Articles = () => {
   return (
