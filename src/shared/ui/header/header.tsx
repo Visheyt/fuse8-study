@@ -21,6 +21,9 @@ export const Header = () => {
         <NavLink className={getNavClass} to={routes.navigation.getLink()}>
           Navigation
         </NavLink>
+        <NavLink className={getNavClass} to={routes.articles.getLink()}>
+          Articles
+        </NavLink>
       </nav>
     </header>
   );

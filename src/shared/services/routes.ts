@@ -1,6 +1,7 @@
 interface Route {
   getLink: () => string;
   pathName: string;
+  routes?: Record<string, Route>;
 }
 export const routes: Record<string, Route> = {
   main: {
@@ -18,5 +19,19 @@ export const routes: Record<string, Route> = {
   navigation: {
     getLink: () => 'navigation',
     pathName: '/navigation',
+  },
+  articles: {
+    getLink: () => 'articles',
+    pathName: '/articles',
+    routes: {
+      articlesList: {
+        getLink: () => '/articles/articles-list',
+        pathName: '/articles/articles-list',
+      },
+      createArticle: {
+        getLink: () => '/articles/create-article',
+        pathName: '/articles/create-article',
+      },
+    },
   },
 };
